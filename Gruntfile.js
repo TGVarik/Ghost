@@ -307,10 +307,10 @@ var _              = require('lodash'),
                     }
                 },
                 ghostium: {
-                  command: 'grunt deploy',
+                  command: 'grunt buildwithghost',
                   options: {
                     execOptions:{
-                      cwd: path.resolve(cwd + '/.dist/release/content/themes/ghostium')
+                      cwd: path.resolve(cwd + '/.build/release/content/themes/ghostium')
                     }
                   }
                 }
@@ -499,7 +499,8 @@ var _              = require('lodash'),
                     }, {
                         expand: true,
                         src: buildGlob,
-                        dest: '<%= paths.releaseBuild %>/'
+                        dest: '<%= paths.releaseBuild %>/',
+                        dot: true
                     }]
                 }
             },
