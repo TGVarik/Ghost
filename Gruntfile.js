@@ -305,6 +305,14 @@ var _              = require('lodash'),
                     execOptions: {
                         env: 'NODE_ENV=' + process.env.NODE_ENV
                     }
+                },
+                ghostium: {
+                  command: 'grunt deploy',
+                  options: {
+                    execOptions:{
+                      cwd: path.resolve(cwd + '/.dist/release/content/themes/ghostium')
+                    }
+                  }
                 }
             },
 
@@ -1062,6 +1070,18 @@ var _              = require('lodash'),
             ' - Clean out unnecessary files (travis, .git*, etc)\n' +
             ' - Zip files in release-folder to dist-folder/#{version} directory',
             ['init', 'concat:prod', 'copy:prod', 'emberBuildProd', 'uglify:release', 'clean:release', 'copy:release', 'compress:release']);
+
+        grunt.registerTask('deploy', [
+          'shell:bower',
+          'update_submodules',
+          'concat:prod',
+          'copy:prod',
+          'emberBuildProd',
+          'uglify:release',
+          'clean:release',
+          'copy:release',
+          'shell:ghostium'
+          ]);
     };
 
 // Export the configuration
